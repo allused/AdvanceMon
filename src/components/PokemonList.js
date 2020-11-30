@@ -1,17 +1,25 @@
-import {BrowserRouter as Router, Link, useParams} from 'react-router-dom';
+import {BrowserRouter as  Link, useParams} from 'react-router-dom';
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import Navbar from './NavBar';
+import PokeCard from './Cards/PokeCard';
 
 
 
 function PokemonList() {
 
-    const[pokemons, setPokemons] = useState([])
+    const[pokemons, setPokemons] = useState([]);
+
+    
+
 
     useEffect(()=>{axios.get('https://pokeapi.co/api/v2/pokemon')
-        .then(res => {console.log(res.data.results)
-             setPokemons(res.data.results)} )
+        .then(res => 
+            {
+            
+            setPokemons(res.data.results)
+            
+            } )
 }, [])
 
     let pattern = "/[0-9]+/$"
@@ -20,9 +28,11 @@ function PokemonList() {
     return (
         <div style={containerStyle}>
             {
-                pokemons.map(pokemon => <div style={cardStyle}><h2><Link to={'/pokemon'+getPokemonId(pokemon.url)} style={linkStyle}>{pokemon.name}</Link></h2></div>)
+                pokemons.map(pokemon => <PokeCard  key={getPokemonId(pokemon.url)} url={pokemon.url} />)
             }
+            
         </div>
+        
     )
 }
 
