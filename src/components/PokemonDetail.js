@@ -5,17 +5,20 @@ import { useParams } from 'react-router-dom'
 function PokemonDetail() {
 
     let {id} = useParams();
-    const[pokemon, setPokemon] = useState([])
+    const[pokemon, setPokemon] = useState([]);
+    const[loading, setLoading] = useState(true);
 
     useEffect(() => {
         axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
         .then(res => {
             console.log(res.data) 
-            setPokemon(res.data)})
+            setPokemon(res.data)
+            setLoading(false)})
     }, [])
     
 
     return (
+        !loading ?
         <div className="po-container" style={poContainerStyle}>
             { 
             <div className="po-card" style={pokemonCardStyle}>
@@ -26,6 +29,7 @@ function PokemonDetail() {
                 <div></div>
             </div>}
         </div>
+        : <div><h2>Loading..</h2></div>
     )
 }
 
