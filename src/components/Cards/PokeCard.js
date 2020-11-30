@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {Link } from 'react-router-dom';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/styles';
 import CardContent from './CardContent'; 
+import ThemeContext from '../ThemeContext';
 
 function PokeCard(props) {
 
@@ -36,6 +37,15 @@ function PokeCard(props) {
 
         },
 
+        lightTheme: {
+            
+
+        },
+
+        darkTheme: {
+            backgroundColor: '#6d6d6d'
+        },
+
         cardMedia: {
             height: '80px',
             width: '50%',
@@ -63,11 +73,13 @@ function PokeCard(props) {
 
     const classes = style();
 
+    const themes = useContext(ThemeContext)
+
     return (
         !loading ?
-        <div className={classes.cardContainer}>
+        <div className={`${classes.cardContainer} ${themes? classes.lightTheme : classes.darkTheme}`}>
                 
-                <Link to={`/pokemon/${pokemon.id}`}><div className={classes.cardMedia}><img src={pokemon.sprites.front_default} alt="Not found"></img></div></Link>
+                <Link to={`/pokemon/${pokemon.id}`}><div className={classes.cardMedia}><img src={themes ? pokemon.sprites["front_default"] : pokemon.sprites["front_shiny"]} alt="Not found"></img></div></Link>
                 <div className={classes.cardTitle}><h2>{pokemon.name.capitalize()}</h2></div>
                 <div className={classes.cardContent}> <CardContent types={pokemon.types}/></div>
         </div>

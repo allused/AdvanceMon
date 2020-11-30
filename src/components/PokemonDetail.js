@@ -1,12 +1,15 @@
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { useParams } from 'react-router-dom'
+import ThemeContext from './ThemeContext';
 
 function PokemonDetail() {
 
     let {id} = useParams();
     const[pokemon, setPokemon] = useState([]);
     const[loading, setLoading] = useState(true);
+
+    const themes = useContext(ThemeContext);
 
     useEffect(() => {
         axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
@@ -22,7 +25,7 @@ function PokemonDetail() {
         <div className="po-container" style={poContainerStyle}>
             { 
             <div className="po-card" style={pokemonCardStyle}>
-                <img src={pokemon.sprites["front_default"]} alt="not found" width="150px" height="140px"></img>
+                <img src={ themes ? pokemon.sprites["front_default"] : pokemon.sprites["front_shiny"]} alt="not found" width="150px" height="140px"></img>
                 <div><h1>Name: {pokemon.name}</h1></div>
                 <div><h2>Weight: {pokemon.weight} kg</h2>
                      <h2>Height: {pokemon.height}</h2></div>

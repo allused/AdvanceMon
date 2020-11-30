@@ -1,16 +1,30 @@
+import { makeStyles } from '@material-ui/styles';
 import React,{useContext} from 'react';
 import ThemeContext from './ThemeContext';
 
 
-// function ThemeToggle() {
+function ThemeToggle(props) {
 
-//     const [isLightTheme, setThemeMode] = useContext(ThemeContext)
+    const themes = useContext(ThemeContext);
 
-//     return (
-//         <div >
-//             <h3 onClick={()=>{setThemeMode(!isLightTheme)}}>{isLightTheme === true ? "Dark" : "Light" }</h3>
-//         </div>
-//     )
-// }
+    const useStyle = makeStyles({
 
-// export default ThemeToggle
+        toggleButton: {
+
+            border: '1px solid black',
+            backgroundColor: 'white',
+            height: '70%',
+            float: 'right'
+        }
+    })
+
+    const style = useStyle();
+    return (
+
+        <div className={style.toggleButton}>
+            <h3 onClick={props.toggle}>{themes === true ? "Dark" : "Light" }</h3>
+        </div>
+    )
+}
+
+export default ThemeToggle
