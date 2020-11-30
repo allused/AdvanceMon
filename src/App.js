@@ -24,7 +24,7 @@ function App() {
         <Route path="/types" component={TypeList}/>
         {/* </ThemeContext.Provider> */}
         </div>
-      </Router>
+    </Router>
   )
 }
 
