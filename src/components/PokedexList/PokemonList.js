@@ -10,7 +10,7 @@ function PokemonList(props) {
             width: '330px',
             marginTop: '-10px',
             verticalAlign: 'middle',
-            border: '2px solid black',
+           
             display: 'flex',
             flexDirection: 'row',
             flexWrap: 'wrap',
