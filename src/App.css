@@ -7,6 +7,13 @@
   pointer-events: none;
 }
 
+@font-face {
+  font-family: "Pokemon-Font";
+  font-style: normal;
+  font-weight: normal;
+  src: url("/./src/resources/Pokemon.ttf");
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

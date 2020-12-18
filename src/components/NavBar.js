@@ -20,7 +20,7 @@ const linkStyle = {
 
 const navBar = {
     display: 'flex',
-    backgroundColor: '#ff0000cf',
+    backgroundColor: '#dc0a2d',
     
 }
 

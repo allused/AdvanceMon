@@ -12,9 +12,9 @@ function PokeCard(props) {
     
     let pokeUrl = props.url;
     
-    String.prototype.capitalize = function() {
-        return this.charAt(0).toUpperCase() + this.slice(1);
-    }
+
+
+    const capitalize = (text) => text.charAt(0).toUpperCase()+text.slice(1);
 
     useEffect(() => {
         axios.get(`${pokeUrl}`)
@@ -25,50 +25,25 @@ function PokeCard(props) {
     }, [])
 
     const style = makeStyles({
-        
+
         cardContainer: {
-            width: '200px',
-            alignContent: 'center',
-            border: '2px solid black',
-            padding: '10px',
-            margin: '20px',
-            alignItems: 'center',
-            borderRadius: '100px'
-
+            width: 'inherit',
+            height: 'inherit',
+            display: 'flex',
+            alignContent: 'center'
         },
 
-        lightTheme: {
+        card: {
+            width: '55px',
+            height: '55px',
+            margin: '8px',
+            marginTop: '-8px',
+            boxSizing: 'border-box',
+            backgroundRepeat: 'no-repeat',
             
-
         },
 
-        darkTheme: {
-            backgroundColor: '#6d6d6d'
-        },
 
-        cardMedia: {
-            height: '80px',
-            width: '50%',
-            display: 'block',
-            marginLeft: 'auto',
-            marginRight: 'auto',
-            //alignItems: 'center'
-
-        },
-
-        cardTitle: {
-            color: 'red',
-            textAlign: 'center',
-            fontFamily: 'Roboto, sans-serif'
-
-        },
-
-        cardContent: {
-            height: '60px',
-            textAlign: 'center',
-            fontFamily: 'Roboto, sans-serif'
-
-        }
     })
 
     const classes = style();
@@ -77,12 +52,11 @@ function PokeCard(props) {
 
     return (
         !loading ?
-        <div className={`${classes.cardContainer} ${themes? classes.lightTheme : classes.darkTheme}`}>
-                
-                <Link to={`/pokemon/${pokemon.id}`}><div className={classes.cardMedia}><img src={themes ? pokemon.sprites["front_default"] : pokemon.sprites["front_shiny"]} alt="Not found"></img></div></Link>
-                <div className={classes.cardTitle}><h2>{pokemon.name.capitalize()}</h2></div>
-                <div className={classes.cardContent}> <CardContent types={pokemon.types}/></div>
-        </div>
+       
+            <div className={classes.card}>
+                <Link to={`/pokemon/${pokemon.id}`}><img src={themes ? pokemon.sprites["front_default"] : pokemon.sprites["front_shiny"]} alt="Not found"></img></Link>
+            </div>
+        
         : <div>
             <h2>Loading..</h2>
         </div>
