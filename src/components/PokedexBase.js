@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
+import {Link } from 'react-router-dom';
 import pokedexLayout from '../resources/pokedex-layout2.png';
 
 function PokedexBase(props) {
@@ -50,6 +51,27 @@ function PokedexBase(props) {
             marginTop: '24px',
             borderRadius: '80px'
 
+        },
+
+        statContainer: {
+            fontSize: '12px',
+            position: 'absolute',
+            marginTop: '463px',
+            marginLeft: '18px',
+            width: '318px',
+            height: '46px',
+            display: 'flex',
+            
+        },
+
+        pokedexListButton: {
+            border: '2px solid black',
+            position: 'absolute',
+            width: '30px',
+            height: '30px',
+            marginTop: '340px',
+            marginLeft: '55px',
+            borderRadius: '40px'
         }
     });
 
@@ -65,7 +87,13 @@ function PokedexBase(props) {
                 <div className={style.mainScreen}>
                     {props.mainScreen}
                 </div>
-            
+                <div className={style.statContainer}>
+                    {props.statScreen}
+                </div>
+                <Link to="/list">
+                <div className={style.pokedexListButton} >
+                </div>
+                </Link>
         </div>
     )
 }
