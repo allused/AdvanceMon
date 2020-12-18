@@ -4,6 +4,12 @@
   font-weight: normal;
   src: url("/./src/resources/Pokemon.ttf");
 }
+@font-face {
+  font-family: "Roboto-Font";
+  font-style: normal;
+  font-weight: normal;
+  src: url("/./src/resources/Roboto-Thin.ttf");
+}
 
 body {
   margin: 0;
