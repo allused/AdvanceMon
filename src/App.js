@@ -21,7 +21,7 @@ function App() {
           <Navbar toggle={toggleTheme}/>
           <Route path="/pokemon/:id" render={(props)=>(<PokemonDetail toggleTheme={toggleTheme}/>)}/>
           <Route path="/" component={PokedexList}/>
-          <Route path="/list"  component={PokemonList}/>
+          <Route path="/list"  render={(props)=>(<PokemonList toggleTheme={toggleTheme}/>)}/>
           <Route path="/types" component={TypeList}/>
         </ThemeContext.Provider>
         </div>
