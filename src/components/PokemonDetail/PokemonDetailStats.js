@@ -8,14 +8,7 @@ function PokemonDetailStats(props) {
 
     const useStlye = makeStyles({
         statContainer: {
-            fontSize: '12px',
-            position: 'absolute',
-            marginTop: '463px',
-            marginLeft: '18px',
-            width: '318px',
-            height: '46px',
             display: 'flex',
-            
         },
 
         attribute: {
