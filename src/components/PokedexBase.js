@@ -65,14 +65,47 @@ function PokedexBase(props) {
         },
 
         pokedexListButton: {
-            border: '2px solid black',
-            position: 'absolute',
+            
+            marginLeft: '55px',
+        },
+
+        blueBtn: {
+            marginLeft: '167px',
+        },
+
+        greenBtn: {
+            marginLeft: '279px',
+        },
+
+        buttons: {
             width: '30px',
             height: '30px',
             marginTop: '340px',
-            marginLeft: '55px',
-            borderRadius: '40px'
+            borderRadius: '40px',
+            border: '2px solid black',
+            position: 'absolute',
+
+        },
+
+        functionalBtnTitles: {
+            marginTop: '375px',
+            border: '2px solid black',
+            position: 'absolute',
+            width: '80px',
+            height: '30px',
+            fontSize: '7px',
+            color: '#ffffffdb',
+            fontFamily: 'Roboto-Font'
+        },
+
+        greenBtnTitle: {
+            marginLeft: '279px'
+        },
+
+        blueBtnTitle: {
+            marginLeft: '167px',
         }
+
     });
 
     const style = useStyle();
@@ -91,9 +124,16 @@ function PokedexBase(props) {
                     {props.statScreen}
                 </div>
                 <Link to="/list">
-                <div className={style.pokedexListButton} >
-                </div>
+                    <div className={`${style.pokedexListButton} ${style.buttons}`} />
                 </Link>
+                <div className={`${style.greenBtn} ${style.buttons}`} onClick={props.greenBtnAction}></div>
+                <div className={`${style.functionalBtnTitles} ${style.greenBtnTitle}`}>
+                    <h3>{props.greenBtnTitle}</h3>
+                </div>
+                <div className={`${style.blueBtn} ${style.buttons}`} onClick={props.blueBtnAction}></div>
+                <div className={`${style.functionalBtnTitles} ${style.blueBtnTitle}`}>
+                    <h3>{props.blueBtnTitle}</h3>
+                </div>
         </div>
     )
 }
