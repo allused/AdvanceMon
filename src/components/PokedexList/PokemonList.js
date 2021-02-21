@@ -7,10 +7,10 @@ function PokemonList(props) {
     const useStyle = makeStyles({
         pokemonContainer: {
             height: '380px',
-            width: '330px',
+            width: '344px',
             marginTop: '-10px',
             verticalAlign: 'middle',
-           
+            marginLeft: '-10px',
             display: 'flex',
             flexDirection: 'row',
             flexWrap: 'wrap',
