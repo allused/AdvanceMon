@@ -2,8 +2,13 @@ import React, {useState, useEffect, useContext} from 'react';
 import {Link } from 'react-router-dom';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/styles';
-import CardContent from './CardContent'; 
 import ThemeContext from '../ThemeContext';
+
+/*
+This component responsible for displaying the pokemons in the Pokemon List view
+It shows the default or the shiny pics of the pokemon, depends on the theme context actual value
+Props: URL - the actual pokemon url, so it can fetch the picture data from the pokemon API
+*/
 
 function PokeCard(props) {
 
@@ -11,10 +16,6 @@ function PokeCard(props) {
     const [loading, setLoading] = useState(true);
     
     let pokeUrl = props.url;
-    
-
-
-    const capitalize = (text) => text.charAt(0).toUpperCase()+text.slice(1);
 
     useEffect(() => {
         axios.get(`${pokeUrl}`)
@@ -34,8 +35,8 @@ function PokeCard(props) {
         },
 
         card: {
-            width: '55px',
-            height: '55px',
+            width: '50px',
+            height: '50px',
             margin: '8px',
             marginTop: '-8px',
             boxSizing: 'border-box',
@@ -58,7 +59,7 @@ function PokeCard(props) {
             </div>
         
         : <div>
-            <h2>Loading..</h2>
+            <h5>Loading..</h5>
         </div>
     )
 }

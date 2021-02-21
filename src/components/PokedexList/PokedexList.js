@@ -2,6 +2,12 @@ import React, {useState, useEffect, useContext} from 'react';
 import axios from 'axios';
 import PokemonList from './/PokemonList';
 import PokedexBase from '../PokedexBase';
+/* 
+This component responsible for the List view page, controlls the functionalty two of the main buttons,
+it calls the PokedexBase component whith the Pokemon List View component
+Props: toggleTheme - this is the theme toggle function, to switch between the two themes
+Route: http://localhost:3000/
+*/
 
 function PokedexList(props) {
 

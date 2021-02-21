@@ -1,5 +1,12 @@
 import React from 'react'
-
+/* 
+This component used for displaying media elements on the Pokemon Detail Mainscreen, in the Overview option
+Props: containerStyle - This is container div div style, which contains the images and the type name style
+        typeNameStyle - It conatains the style class for the type name
+        imageStyle - It contains the style class for the images
+        frontImgSrc - It contains the source of the front image to display
+        backImgsrc  - It contains the back image to display
+*/
 function MediaContent(props) {
     return (
         <div className={`${props.containerStyle}`}>

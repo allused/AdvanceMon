@@ -2,7 +2,10 @@ import React, {useState, useEffect, useContext} from 'react';
 import { makeStyles } from '@material-ui/styles';
 import MediaContent from '../PokemonDetailMainScreen/MediaContent';
 import ThemeContext from '../ThemeContext';
-
+/* 
+This component organize the Pokemon Detail page  Overview Option content on the Main Screen
+Props: pokemon - It is a pokemon object, contains every data of the given pokemon
+*/
 function OverviewOptionContent(props) {
 
     const capitalize = (text) => text.charAt(0).toUpperCase()+text.slice(1);

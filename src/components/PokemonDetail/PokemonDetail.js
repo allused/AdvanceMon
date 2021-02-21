@@ -7,7 +7,11 @@ import PokemonDetailMainScreen from '../PokemonDetailMainScreen/OverviewOptionCo
 import PokemonDetailStats from '../PokemonDetail/PokemonDetailStats';
 import PokedexBase from '../PokedexBase';
 
-
+/* 
+This component is responsible for the Pokemon Detail page, it calls the Pokedex Base and the Pokemon detail related components
+Props: toggleTheme - It is the theme toggle function to switch between the two themes
+Route: http://localhost:3000/pokemonId
+*/
 function PokemonDetail(props) {
 
     let {id} = useParams();

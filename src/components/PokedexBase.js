@@ -3,6 +3,18 @@ import { makeStyles } from '@material-ui/styles';
 import {Link } from 'react-router-dom';
 import pokedexLayout from '../resources/pokedex-layout2.png';
 
+/* 
+This component is the Pokedex base layout, every function may be passed as props, so it has no function in itself,
+but it let's you display your desired content on any screen / Main Screen, Option screen, Attribute screen /
+Props: toggleTheme - It is a function to switch between the two themes in ThemeContext
+        optionMenu - You can pass a component which you want to be displayed in the Option Menu Screen
+        mainScreen - You can pass a component which you want to be displayed in the Main Screen
+        greenBtnAction - You can pass a component to provide a functionality to the green button
+        greenBtnTitle  - You can pass a title for the green button
+        blueBtnAction - You can pass a component to prodivde functionality to the blue button
+        blueBtnTitle - You can pass a title for the blue button
+*/
+
 function PokedexBase(props) {
 
     const useStyle = makeStyles({
@@ -123,7 +135,7 @@ function PokedexBase(props) {
                 <div className={style.statContainer}>
                     {props.statScreen}
                 </div>
-                <Link to="/list">
+                <Link to="/">
                     <div className={`${style.pokedexListButton} ${style.buttons}`} />
                 </Link>
                 <div className={`${style.greenBtn} ${style.buttons}`} onClick={props.greenBtnAction}></div>
