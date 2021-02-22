@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/styles';
-import OptionMenu from '../PokemonDetailMenu/OverviewOption';
+import OverviewOption from '../PokemonDetailMenu/OverviewOption';
 import PokemonDetailMainScreen from '../PokemonDetailMainScreen/OverviewOptionContent';
 import PokemonDetailStats from '../PokemonDetail/PokemonDetailStats';
 import PokedexBase from '../PokedexBase';
@@ -18,8 +18,9 @@ function PokemonDetail(props) {
     let {id} = useParams();
     const[pokemon, setPokemon] = useState([]);
     const[loading, setLoading] = useState(true);
+    const overviewOption = <OverviewOption />
     const mainScreen =  <PokemonDetailMainScreen pokemon={pokemon}/>
-    const optionMenu =  <OptionsContainer/>
+    const optionMenu =  <OptionsContainer firstOption={overviewOption}/>
     const statScreen = <PokemonDetailStats pokemon={pokemon}/>
 
     const useStyle = makeStyles({
