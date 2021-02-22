@@ -6,6 +6,7 @@ import OptionMenu from '../PokemonDetailMenu/OverviewOption';
 import PokemonDetailMainScreen from '../PokemonDetailMainScreen/OverviewOptionContent';
 import PokemonDetailStats from '../PokemonDetail/PokemonDetailStats';
 import PokedexBase from '../PokedexBase';
+import OptionsContainer from '../PokemonDetailMenu/OptionsContainer'
 
 /* 
 This component is responsible for the Pokemon Detail page, it calls the Pokedex Base and the Pokemon detail related components
@@ -18,7 +19,7 @@ function PokemonDetail(props) {
     const[pokemon, setPokemon] = useState([]);
     const[loading, setLoading] = useState(true);
     const mainScreen =  <PokemonDetailMainScreen pokemon={pokemon}/>
-    const optionMenu =  <OptionMenu/>
+    const optionMenu =  <OptionsContainer/>
     const statScreen = <PokemonDetailStats pokemon={pokemon}/>
 
     const useStyle = makeStyles({
