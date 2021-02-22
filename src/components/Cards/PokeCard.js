@@ -2,8 +2,14 @@ import React, {useState, useEffect, useContext} from 'react';
 import {Link } from 'react-router-dom';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/styles';
-import CardContent from './CardContent'; 
 import ThemeContext from '../ThemeContext';
+import pokeBackgroundImg from '../../resources/pokeCardBackground.png'
+
+/*
+This component responsible for displaying the pokemons in the Pokemon List view
+It shows the default or the shiny pics of the pokemon, depends on the theme context actual value
+Props: URL - the actual pokemon url, so it can fetch the picture data from the pokemon API
+*/
 
 function PokeCard(props) {
 
@@ -11,10 +17,6 @@ function PokeCard(props) {
     const [loading, setLoading] = useState(true);
     
     let pokeUrl = props.url;
-    
-    String.prototype.capitalize = function() {
-        return this.charAt(0).toUpperCase() + this.slice(1);
-    }
 
     useEffect(() => {
         axios.get(`${pokeUrl}`)
@@ -25,50 +27,39 @@ function PokeCard(props) {
     }, [])
 
     const style = makeStyles({
-        
+
         cardContainer: {
-            width: '200px',
-            alignContent: 'center',
-            border: '2px solid black',
-            padding: '10px',
-            margin: '20px',
-            alignItems: 'center',
-            borderRadius: '100px'
-
+            width: 'inherit',
+            height: 'inherit',
+            display: 'flex',
+            alignContent: 'center'
         },
 
-        lightTheme: {
+        card: {
+            width: '50px',
+            height: '50px',
+            margin: '8px',
+            marginTop: '-8px',
+            boxSizing: 'border-box',
+            backgroundRepeat: 'no-repeat',
             
+            
+            
+            
+            "&:hover": {
+                background: `url(${pokeBackgroundImg})`,
+                backgroundSize: '20px 20px',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center top',
+                
 
+                
+                
+            }
+            
         },
 
-        darkTheme: {
-            backgroundColor: '#6d6d6d'
-        },
 
-        cardMedia: {
-            height: '80px',
-            width: '50%',
-            display: 'block',
-            marginLeft: 'auto',
-            marginRight: 'auto',
-            //alignItems: 'center'
-
-        },
-
-        cardTitle: {
-            color: 'red',
-            textAlign: 'center',
-            fontFamily: 'Roboto, sans-serif'
-
-        },
-
-        cardContent: {
-            height: '60px',
-            textAlign: 'center',
-            fontFamily: 'Roboto, sans-serif'
-
-        }
     })
 
     const classes = style();
@@ -77,14 +68,13 @@ function PokeCard(props) {
 
     return (
         !loading ?
-        <div className={`${classes.cardContainer} ${themes? classes.lightTheme : classes.darkTheme}`}>
-                
-                <Link to={`/pokemon/${pokemon.id}`}><div className={classes.cardMedia}><img src={themes ? pokemon.sprites["front_default"] : pokemon.sprites["front_shiny"]} alt="Not found"></img></div></Link>
-                <div className={classes.cardTitle}><h2>{pokemon.name.capitalize()}</h2></div>
-                <div className={classes.cardContent}> <CardContent types={pokemon.types}/></div>
-        </div>
+       
+            <div className={classes.card}>
+                <Link to={`/pokemon/${pokemon.id}`}><img src={themes ? pokemon.sprites["front_default"] : pokemon.sprites["front_shiny"]} alt="Not found"></img></Link>
+            </div>
+        
         : <div>
-            <h2>Loading..</h2>
+            <h5>Loading..</h5>
         </div>
     )
 }
