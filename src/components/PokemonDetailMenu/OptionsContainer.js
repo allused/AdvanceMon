@@ -30,14 +30,15 @@ const optionsTheme = {
         border: '2px solid red',
         margin: 'auto',
         alignItems: 'center',
-        borderRadius: '5px'
+        borderRadius: '5px',
+        "&:hover":{
+            backgroundColor: '#ff000082'
+        }
 
     },
     firstOptionStyle: {
         marginTop: '7px',
-        "&:hover":{
-            backgroundColor: '#ff000082'
-        }
+        
     }
 }
 
