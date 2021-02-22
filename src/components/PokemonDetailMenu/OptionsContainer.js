@@ -24,14 +24,16 @@ function OptionsContainer(props) {
 const optionsTheme = {
     sharedStyle: {
         paddingLeft: '20px',
-        display: 'table-cell',
-        height: '50px',
-        width: '300px',
-        border: '2px solid red'
+        display: 'flex',
+        height: '35px',
+        width: '290px',
+        border: '2px solid red',
+        margin: 'auto',
+        alignItems: 'center'
 
     },
     firstOptionStyle: {
-        marginTop: '15px',
+        marginTop: '7px',
     }
 }
 
