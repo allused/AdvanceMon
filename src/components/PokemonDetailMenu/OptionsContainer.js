@@ -23,17 +23,21 @@ function OptionsContainer(props) {
 
 const optionsTheme = {
     sharedStyle: {
-        paddingLeft: '20px',
+        paddingLeft: '16px',
         display: 'flex',
         height: '35px',
-        width: '290px',
+        width: '293px',
         border: '2px solid red',
         margin: 'auto',
-        alignItems: 'center'
+        alignItems: 'center',
+        borderRadius: '5px'
 
     },
     firstOptionStyle: {
         marginTop: '7px',
+        "&:hover":{
+            backgroundColor: '#ff000082'
+        }
     }
 }
 
