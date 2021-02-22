@@ -1,15 +1,22 @@
 import React from 'react';
-import { ThemeProvider } from '@material-ui/styles';
-import { makeStyles } from '@material-ui/styles';
+import { ThemeProvider, makeStyles } from '@material-ui/core/styles';
 
 function OptionsContainer(props) {
 
     const style = useStyle();
+    //const firstOption = props.firstOption; 
+    const secondOption = props.secondOption;
+    const thirdOption = props.thirdOption;
+    const fourthOption = props.fourthOption;
 
     return (
         <div className={style.containerStyle}>
-
-            
+            <ThemeProvider theme={optionsTheme}>
+                {props.firstOption}
+                {props.secondOption}
+                {props.thirdOption}
+                {props.fourthOption}
+            </ThemeProvider>
         </div>
     )
 }
@@ -18,8 +25,12 @@ const optionsTheme = {
     sharedStyle: {
         paddingLeft: '20px',
         display: 'table-cell',
+        height: '50px',
+        width: 'inherit',
+        border: '2px solid red'
+
     },
-    overviewStyle: {
+    firstOptionStyle: {
         marginTop: '15px',
     }
 }
