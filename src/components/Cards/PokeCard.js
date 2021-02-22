@@ -3,6 +3,7 @@ import {Link } from 'react-router-dom';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/styles';
 import ThemeContext from '../ThemeContext';
+import pokeBackgroundImg from '../../resources/pokeCardBackground.png'
 
 /*
 This component responsible for displaying the pokemons in the Pokemon List view
@@ -41,6 +42,20 @@ function PokeCard(props) {
             marginTop: '-8px',
             boxSizing: 'border-box',
             backgroundRepeat: 'no-repeat',
+            
+            
+            
+            
+            "&:hover": {
+                background: `url(${pokeBackgroundImg})`,
+                backgroundSize: '20px 20px',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center top',
+                
+
+                
+                
+            }
             
         },
 
