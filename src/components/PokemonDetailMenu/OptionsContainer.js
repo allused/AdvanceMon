@@ -26,7 +26,7 @@ const optionsTheme = {
         paddingLeft: '20px',
         display: 'table-cell',
         height: '50px',
-        width: 'inherit',
+        width: '300px',
         border: '2px solid red'
 
     },
