@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {makeStyle} from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import axios from 'axios';
 
 function EvolutionOptionContent(props) {
@@ -20,8 +20,8 @@ function EvolutionOptionContent(props) {
     )
 }
 
-const useStyle = makeStyle({
-    containerStyle: 'table-cell'
+const useStyle = makeStyles({
+    containerStyle: {display: 'table-cell'}
 })
 
 export default EvolutionOptionContent

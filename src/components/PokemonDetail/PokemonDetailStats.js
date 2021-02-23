@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/styles';
 
 
@@ -9,6 +9,8 @@ Props: pokemon - The pokemon object to get the actual pokemon attributes
 function PokemonDetailStats(props) {
 
     const pokemon = props.pokemon;
+    const[loading, setLoading] = useState(props.loading)
+    console.log(pokemon)
 
     const useStlye = makeStyles({
         statContainer: {
@@ -29,6 +31,7 @@ function PokemonDetailStats(props) {
     const style = useStlye();
 
     return (
+        !loading ?
         <div className={style.statContainer}>
             <div className={style.attribute}>
                 <h4>Hp: </h4>
@@ -51,6 +54,7 @@ function PokemonDetailStats(props) {
                 })}</div>
             </div>
         </div>
+        : <h3>Loading..</h3>
     )
 }
 

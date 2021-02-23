@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useContext} from 'react';
 import { makeStyles } from '@material-ui/styles';
 import MediaContent from '../PokemonDetailMainScreen/MediaContent';
 import ThemeContext from '../ThemeContext';
@@ -11,6 +11,8 @@ function OverviewOptionContent(props) {
     const capitalize = (text) => text.charAt(0).toUpperCase()+text.slice(1);
     const isDefault = useContext(ThemeContext);
     const pokemon = props.pokemon;
+    const[loading, setLoading] = useState(props.loading);
+    console.log(pokemon);
 
     const useStyle = makeStyles({
 
@@ -96,6 +98,7 @@ function OverviewOptionContent(props) {
     const style = useStyle();
     
     return (
+        !loading ?
         <div>
             <div className={style.nameContent}>
                 <div className={style.nameContainer}>
@@ -129,6 +132,7 @@ function OverviewOptionContent(props) {
                 </div>
             </div>
         </div>
+        : <h3>Loading..</h3>
     )
 }
 
