@@ -13,6 +13,10 @@ which pokemons great or bad against it. Stay Tuned !
 
 In the project directory, you can run:
 
+### `npm install`
+
+Install the project dependencies to be able to run the project.
+
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\
