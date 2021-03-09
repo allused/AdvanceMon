@@ -18,7 +18,7 @@ useEffect(() => {
               getEvolutionsData(res.data);
           });
     })
-})
+}, [])
 
   const getEvolutionsData = (evoChainData) => {
     let currentEvolution = evoChainData.chain;
