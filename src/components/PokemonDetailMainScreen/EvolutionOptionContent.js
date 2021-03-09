@@ -7,18 +7,6 @@ function EvolutionOptionContent(props) {
   const[allEvoData, setEvolutionData] = useState([]);
   const style = useStyle();
 
-/*   useEffect(() => {
-    axios(
-      `https://pokeapi.co/api/v2/evolution-chain/${props.pokemonId}`
-    ).then((res) => {
-        setEvolutionChain(res.data);
-        console.log(evolutionChain, res.data ,props.pokemonId)
-        getEvolutionsData(res.data);
-    });
-
-    
-}, []); */
-
 useEffect(() => {
     axios(`https://pokeapi.co/api/v2/pokemon-species/${props.pokemonId}/`)
     .then((res) => {
