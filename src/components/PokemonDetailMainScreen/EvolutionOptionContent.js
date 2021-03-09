@@ -7,16 +7,30 @@ function EvolutionOptionContent(props) {
   const[allEvoData, setEvolutionData] = useState([]);
   const style = useStyle();
 
-  useEffect(() => {
+/*   useEffect(() => {
     axios(
       `https://pokeapi.co/api/v2/evolution-chain/${props.pokemonId}`
     ).then((res) => {
         setEvolutionChain(res.data);
-        console.log(evolutionChain)
-        getEvolutionsData(evolutionChain);
+        console.log(evolutionChain, res.data ,props.pokemonId)
+        getEvolutionsData(res.data);
     });
+
     
-  }, []);
+}, []); */
+
+useEffect(() => {
+    axios(`https://pokeapi.co/api/v2/pokemon-species/${props.pokemonId}/`)
+    .then((res) => {
+        axios(
+            `${res.data.evolution_chain.url}`
+          ).then((res) => {
+              setEvolutionChain(res.data);
+              console.log(evolutionChain, res.data ,props.pokemonId)
+              getEvolutionsData(res.data);
+          });
+    })
+})
 
   const getEvolutionsData = (evoChainData) => {
     let currentEvolution = evoChainData.chain;
@@ -51,7 +65,11 @@ function EvolutionOptionContent(props) {
   console.log(allEvoData);
   return (
     <div className={style.containerStyle}>
-     {allEvoData.map(pokemon => <h2>{pokemon.pokemon_name}</h2>)}
+        
+     {allEvoData != null ?
+     allEvoData.map(pokemon => <h2>{pokemon.pokemon_name}</h2>)
+     : <h2>Loading..</h2>
+     }
     </div>
   );
 }
