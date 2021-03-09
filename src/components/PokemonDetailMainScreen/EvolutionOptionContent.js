@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 
 function EvolutionOptionContent(props) {
-  const [evolutionChain, setEvolutionChain] = useState(null);
   const[allEvoData, setEvolutionData] = useState([]);
   const style = useStyle();
 
@@ -13,8 +12,6 @@ useEffect(() => {
         axios(
             `${res.data.evolution_chain.url}`
           ).then((res) => {
-              setEvolutionChain(res.data);
-              console.log(evolutionChain, res.data ,props.pokemonId)
               getEvolutionsData(res.data);
           });
     })
