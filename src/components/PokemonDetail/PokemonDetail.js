@@ -17,24 +17,25 @@ Route: http://localhost:3000/pokemonId
 */
 function PokemonDetail(props) {
 
+    const activeScreens = {
+        mainScreen: null,
+        statScreen: null
+    }
     let {id} = useParams();
     const[pokemon, setPokemon] = useState([]);
     const[loading, setLoading] = useState(true);
+    const[screens, setScreens] = useState(activeScreens)
     
     
     
     /* const[mainScreen, setMainScreen] = useState();
     const[statScreen, setStatScreen] = useState(); */
     
-    const activeScreens = {
-        mainScreen: null,
-        statScreen: null
-    }
+    
     
     const style = useStyle();
     
-    const setMainScreen = (component) => activeScreens.mainScreen = component;
-    const setStatScreen = (component) => activeScreens.statScreen = component;
+  
     
     useEffect(() => {
         axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
@@ -46,34 +47,33 @@ function PokemonDetail(props) {
     }, [])
     
     const handleOverviewOptionClick = () => {
-        setMainScreen(overviewOptionContent)
-        setStatScreen(overviewOptionStatScreen)
+        
+        setScreens(overviewOptionScreens)
     }
     
     const handleEvolutionOptionClick = () => {
-        setMainScreen(evolutionOptionContent)
-        setStatScreen(null)
+        setScreens(evolutionOptionScreens)
+
     }
     
-    const handleOptionClicks = {
-        firstOption: handleOverviewOptionClick,
-        secondOption: handleEvolutionOptionClick
-    }
-    const overviewOption = <OverviewOption handleClick={handleOptionClicks.firstOption}/>
-    const evolutionOption = <EvolutionOption handleClick={handleOptionClicks.secondOption}/>
+    const overviewOption = <OverviewOption handleClick={handleOverviewOptionClick}/>
+    const evolutionOption = <EvolutionOption handleClick={handleEvolutionOptionClick}/>
     
     const overviewOptionContent =  <OverviewOptionContent pokemon={pokemon} loading={loading}/>
     const evolutionOptionContent = <EvolutionOptionContent />
     
     const overviewOptionStatScreen = <PokemonDetailStats pokemon={pokemon} loading={loading}/>
     const optionMenu =  <OptionsContainer firstOption={overviewOption} secondOption={evolutionOption}/>
+
+    const overviewOptionScreens = {mainScreen: overviewOptionContent, statScreen: overviewOptionStatScreen}
+    const evolutionOptionScreens = {mainScreen: evolutionOptionContent, statScreen: null}
     
     return (
         
         !loading ?
         <div  style={style.poContainerStyle}>  
-        <PokedexBase toggleTheme={props.toggleTheme} mainScreen={activeScreens.mainScreen} 
-        optionMenu={optionMenu} statScreen={activeScreens.statScreen}/>
+        <PokedexBase toggleTheme={props.toggleTheme} mainScreen={screens.mainScreen} 
+        optionMenu={optionMenu} statScreen={screens.statScreen}/>
         </div>
         : <div><h2>Loading..</h2></div>
         )
