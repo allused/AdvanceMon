@@ -5,7 +5,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 This componant represents the Pokemon Detail page Overview Option, not finished yet, 
 TODO - should be clickable, on click: shows the Overview Option Content on the Main screen.
 */
-function OverviewOption() {
+function OverviewOption(props) {
 
 
     const overStyle = useTheme();
@@ -13,7 +13,7 @@ function OverviewOption() {
     const style = useStyle();
     
     return (
-        <div className={`${style.sharedStyle} ${style.firstOptionStyle}`}>
+        <div className={`${style.sharedStyle} ${style.firstOptionStyle}`} onClick={props.handleClick}>
             <h3 >Overview</h3>
         </div>
     )
