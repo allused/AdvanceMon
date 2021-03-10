@@ -17,17 +17,26 @@ useEffect(() => {
     })
 }, [])
 
+useEffect(() => {
+  if (allEvoData !== []){
+    allEvoData.map(pokemon => {
+      axios(`https://pokeapi.co/api/v2/pokemon/${pokemon.pokemon_name}`)
+      .then((res) => Object.assign(pokemon, {front_def: res.data.sprites.front_default,
+        back_def: res.data.sprites.back_default}))
+    })
+  }
+}, allEvoData)
+
   const getEvolutionsData = (evoChainData) => {
     let currentEvolution = evoChainData.chain;
     let evolutionChain = [];
 
     do {
-      let evolutionsCount = currentEvolution["evolves_to"].length;
+      let evolutionsCount = currentEvolution.evolves_to.length;
       evolutionChain.push({
         pokemon_name: currentEvolution.species.name,
-        min_level: !currentEvolution ? 1 : currentEvolution.min_level,
+        min_level: currentEvolution.evolution_details.length == 0  ? 1 : currentEvolution.evolution_details[0].min_level,
       });
-
       if (evolutionsCount > 1) {
         for (let i = 1; i < evolutionsCount; i++) {
           evolutionChain.push({
@@ -50,11 +59,15 @@ useEffect(() => {
   console.log(allEvoData);
   return (
     <div className={style.containerStyle}>
+      {
+        allEvoData != null ?
+      
+      <h2>smth</h2>
+      
         
-     {allEvoData != null ?
-     allEvoData.map(pokemon => <h2>{pokemon.pokemon_name}</h2>)
-     : <h2>Loading..</h2>
-     }
+        : <h2>Loading..</h2>
+      }
+
     </div>
   );
 }
