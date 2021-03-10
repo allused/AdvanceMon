@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
+import MediaContent from './MediaContent';
 
 function EvolutionOptionContent(props) {
   const[allEvoData, setEvolutionData] = useState([]);
+  const[loading, setLoading] = useState(true);
+  const[fetchEvoData, setFetchData] = useState(true);
   const style = useStyle();
 
 useEffect(() => {
@@ -13,19 +16,23 @@ useEffect(() => {
             `${res.data.evolution_chain.url}`
           ).then((res) => {
               getEvolutionsData(res.data);
+              setFetchData(false);
           });
     })
-}, [])
+}, props.pokemonId)
 
 useEffect(() => {
-  if (allEvoData !== []){
+  if (fetchEvoData !== []){
+    console.log(allEvoData)
     allEvoData.map(pokemon => {
       axios(`https://pokeapi.co/api/v2/pokemon/${pokemon.pokemon_name}`)
       .then((res) => Object.assign(pokemon, {front_def: res.data.sprites.front_default,
         back_def: res.data.sprites.back_default}))
     })
+    console.log(allEvoData)
+    setLoading(false);
   }
-}, allEvoData)
+}, fetchEvoData)
 
   const getEvolutionsData = (evoChainData) => {
     let currentEvolution = evoChainData.chain;
@@ -60,11 +67,8 @@ useEffect(() => {
   return (
     <div className={style.containerStyle}>
       {
-        allEvoData != null ?
-      
-      <h2>smth</h2>
-      
-        
+        !loading 
+        ? allEvoData.map(pokemon => <MediaContent name={pokemon.pokemon_name} minLevel={pokemon.min_level} frontImgSrc={pokemon.front_def}/>)
         : <h2>Loading..</h2>
       }
 
