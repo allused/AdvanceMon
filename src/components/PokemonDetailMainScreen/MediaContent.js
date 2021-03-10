@@ -11,6 +11,7 @@ function MediaContent(props) {
     return (
         <div className={`${props.containerStyle}`}>
             <h3 className={`${props.typeNameStyle}`}>Default</h3>
+            {props.min_level !== undefined && <p className={props.levelStyle}>{props.min_level}</p> }
             <img  className={`${props.imageStyle}`} alt="Not Found" src={`${props.frontImgSrc}`}></img>
             <img  className={`${props.imageStyle}`} alt="Not Found" src={`${props.backImgSrc}`}></img>
         </div>
