@@ -10,10 +10,11 @@ Props: containerStyle - This is container div div style, which contains the imag
         minLevel  -  It's an optional props, you can pass the pokemon level here
 */
 function MediaContent(props) {
+    console.log(props)
     return (
         <div className={`${props.containerStyle}`}>
-            <h3 className={`${props.typeNameStyle}`}>{props.name === undefined ? "Default" : props.name}</h3>
-            {props.min_level !== undefined && <p className={props.levelStyle}>{props.minLevel}</p> }
+            <h3 className={`${props.typeNameStyle}`}>{props.name == undefined ? "Default" : props.name}</h3>
+            {props.minLevel != undefined && <p className={props.levelStyle}>minimum level: {props.minLevel}</p> }
             <img  className={`${props.imageStyle}`} alt="Not Found" src={`${props.frontImgSrc}`}></img>
             <img  className={`${props.imageStyle}`} alt="Not Found" src={`${props.backImgSrc}`}></img>
         </div>
