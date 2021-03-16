@@ -4,35 +4,26 @@ import axios from "axios";
 import MediaContent from './MediaContent';
 
 function EvolutionOptionContent(props) {
-  const[allEvoData, setEvolutionData] = useState([]);
-  const[loading, setLoading] = useState(true);
-  const[fetchEvoData, setFetchData] = useState(true);
+  const[allPokemonData, setAllPokeData] = useState([]);
   const style = useStyle();
 
 useEffect(() => {
     axios(`https://pokeapi.co/api/v2/pokemon-species/${props.pokemonId}/`)
-    .then((res) => {
-        axios(
-            `${res.data.evolution_chain.url}`
-          ).then((res) => {
-              getEvolutionsData(res.data);
-              setFetchData(false);
-          });
-    })
-}, props.pokemonId)
+      .then((evoChainUrl) => { return axios(`${evoChainUrl.data.evolution_chain.url}`)})
+        .then((evoChain) => { return getEvolutionsData(evoChain.data)})
+          .then((evoChainList) => {
+            let pokemonPromise = 
+              evoChainList.map(pokemon => axios(`https://pokeapi.co/api/v2/pokemon/${pokemon.pokemon_name}`)
+                .then((pokemonData) => ({pokemon: pokemon, 
+                                frontSprite: pokemonData.data.sprites.front_default, backSprite: pokemonData.data.sprites.back_default })))
 
-useEffect(() => {
-  if (fetchEvoData !== []){
-    console.log(allEvoData)
-    allEvoData.map(pokemon => {
-      axios(`https://pokeapi.co/api/v2/pokemon/${pokemon.pokemon_name}`)
-      .then((res) => Object.assign(pokemon, {front_def: res.data.sprites.front_default,
-        back_def: res.data.sprites.back_default}))
-    })
-    console.log(allEvoData)
-    setLoading(false);
-  }
-}, fetchEvoData)
+            Promise.all(pokemonPromise)
+              .then(allDataSplitted => 
+                allDataSplitted.map(data => ({name: data.pokemon.pokemon_name, minLevel: data.pokemon.min_level, frontSprite: data.frontSprite})))
+                  .then(allData => { setAllPokeData(allData)})
+          })
+    
+}, [props.pokemonId])
 
   const getEvolutionsData = (evoChainData) => {
     let currentEvolution = evoChainData.chain;
@@ -60,15 +51,16 @@ useEffect(() => {
       currentEvolution.hasOwnProperty("evolves_to")
     );
 
-    setEvolutionData(evolutionChain);
-    
+    return evolutionChain;
   };
-  console.log(allEvoData);
+  console.log(allPokemonData)
   return (
     <div className={style.containerStyle}>
       {
-        !loading 
-        ? allEvoData.map(pokemon => <MediaContent name={pokemon.pokemon_name} minLevel={pokemon.min_level} frontImgSrc={pokemon.front_def}/>)
+        !allPokemonData  !== []
+        ? allPokemonData.map(pokemon => <MediaContent evo={true} name={pokemon.name} minLevel={pokemon.minLevel} 
+          frontImgSrc={pokemon.frontSprite} imageStyle={style.mediaCardImg} 
+          containerStyle={style.mediaContainerStyle} typeNameStyle={style.mediaContainerFont} levelStyle={style.meadiaContainerLevel}/>)
         : <h2>Loading..</h2>
       }
 
@@ -77,7 +69,32 @@ useEffect(() => {
 }
 
 const useStyle = makeStyles({
-  containerStyle: { display: "table-cell" },
+  containerStyle: { 
+    display: "table-cell" 
+  },
+
+  mediaCardImg: {
+    width: '70px',
+    height: '70px',
+    paddingLeft: '160px',
+    marginTop: '-100px',
+    position: 'absolute'
+  },
+
+  mediaContainerStyle: {
+    paddingLeft: '20px',
+    paddingTop: '15px'
+    //display: 'flex'
+  },
+
+  mediaContainerFont: {
+    fontSize: '16px'
+  },
+
+  meadiaContainerLevel: {
+    marginTop: '35px',
+    fontSize: '13px'
+  }
 });
 
 export default EvolutionOptionContent;
