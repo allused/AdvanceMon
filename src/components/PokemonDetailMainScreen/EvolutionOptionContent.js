@@ -12,18 +12,21 @@ useEffect(() => {
       .then((evoChainUrl) => axios(`${evoChainUrl.data.evolution_chain.url}`))
         .then((evoChain) => getEvolutionsData(evoChain.data))
           .then((evoChainList) => {
-            let pokemonPromise = 
-              evoChainList.map(pokemon => axios(`https://pokeapi.co/api/v2/pokemon/${pokemon.pokemon_name}`)
-                  .then((pokemonData) => ({pokemon: pokemon, 
-                                          frontSprite: pokemonData.data.sprites.front_default, 
-                                          backSprite: pokemonData.data.sprites.back_default })))
-
-            Promise.all(pokemonPromise)
+            Promise.all(getPokemonsData(evoChainList))
               .then(allDataSplitted => 
                     allDataSplitted.map(data => ({name: data.pokemon.pokemon_name, minLevel: data.pokemon.min_level, frontSprite: data.frontSprite})))
                   .then(allData => { setAllPokeData(allData)})
           })
 }, [props.pokemonId])
+
+  const getPokemonsData = (evoChainList) => {
+    let pokemonPromise = evoChainList.map(pokemon => 
+        axios(`https://pokeapi.co/api/v2/pokemon/${pokemon.pokemon_name}`)
+            .then((pokemonData) => ({pokemon: pokemon, 
+                                      frontSprite: pokemonData.data.sprites.front_default, 
+                                      backSprite: pokemonData.data.sprites.back_default })))
+    return pokemonPromise;
+  }
 
   const getEvolutionsData = (evoChainData) => {
     let currentEvolution = evoChainData.chain;
