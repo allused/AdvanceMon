@@ -9,20 +9,20 @@ function EvolutionOptionContent(props) {
 
 useEffect(() => {
     axios(`https://pokeapi.co/api/v2/pokemon-species/${props.pokemonId}/`)
-      .then((evoChainUrl) => { return axios(`${evoChainUrl.data.evolution_chain.url}`)})
-        .then((evoChain) => { return getEvolutionsData(evoChain.data)})
+      .then((evoChainUrl) => axios(`${evoChainUrl.data.evolution_chain.url}`))
+        .then((evoChain) => getEvolutionsData(evoChain.data))
           .then((evoChainList) => {
             let pokemonPromise = 
               evoChainList.map(pokemon => axios(`https://pokeapi.co/api/v2/pokemon/${pokemon.pokemon_name}`)
-                .then((pokemonData) => ({pokemon: pokemon, 
-                                frontSprite: pokemonData.data.sprites.front_default, backSprite: pokemonData.data.sprites.back_default })))
+                  .then((pokemonData) => ({pokemon: pokemon, 
+                                          frontSprite: pokemonData.data.sprites.front_default, 
+                                          backSprite: pokemonData.data.sprites.back_default })))
 
             Promise.all(pokemonPromise)
               .then(allDataSplitted => 
-                allDataSplitted.map(data => ({name: data.pokemon.pokemon_name, minLevel: data.pokemon.min_level, frontSprite: data.frontSprite})))
+                    allDataSplitted.map(data => ({name: data.pokemon.pokemon_name, minLevel: data.pokemon.min_level, frontSprite: data.frontSprite})))
                   .then(allData => { setAllPokeData(allData)})
           })
-    
 }, [props.pokemonId])
 
   const getEvolutionsData = (evoChainData) => {
@@ -53,11 +53,10 @@ useEffect(() => {
 
     return evolutionChain;
   };
-  console.log(allPokemonData)
   return (
     <div className={style.containerStyle}>
       {
-        !allPokemonData  !== []
+        allPokemonData  !== []
         ? allPokemonData.map(pokemon => <MediaContent evo={true} name={pokemon.name} minLevel={pokemon.minLevel} 
           frontImgSrc={pokemon.frontSprite} imageStyle={style.mediaCardImg} 
           containerStyle={style.mediaContainerStyle} typeNameStyle={style.mediaContainerFont} levelStyle={style.meadiaContainerLevel}/>)
