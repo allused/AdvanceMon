@@ -60,7 +60,7 @@ function PokemonDetail(props) {
     const evolutionOption = <EvolutionOption handleClick={handleEvolutionOptionClick}/>
     
     const overviewOptionContent =  <OverviewOptionContent pokemon={pokemon} loading={loading}/>
-    const evolutionOptionContent = <EvolutionOptionContent />
+    const evolutionOptionContent = <EvolutionOptionContent pokemonId={pokemon.id}/>
     
     const overviewOptionStatScreen = <PokemonDetailStats pokemon={pokemon} loading={loading}/>
     const optionMenu =  <OptionsContainer firstOption={overviewOption} secondOption={evolutionOption}/>
